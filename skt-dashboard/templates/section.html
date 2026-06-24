@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Section Monitoring{% endblock %}
+{% block content %}
+<div class="panel">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle data-table">
+      <thead><tr><th>Section</th><th>Courses</th><th>Target</th><th>Actual</th><th>Budget</th><th>Completion</th></tr></thead>
+      <tbody>
+        {% for row in section_rows %}
+        <tr>
+          <td><strong>{{ row.section }}</strong></td>
+          <td>{{ row.courses }}</td>
+          <td>{{ '{:,.0f}'.format(row.target_participants) }}</td>
+          <td>{{ '{:,.0f}'.format(row.actual_participants) }}</td>
+          <td>RM {{ '{:,.0f}'.format(row.budget) }}</td>
+          <td><span class="status-pill">{{ row.completion_pct }}%</span></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

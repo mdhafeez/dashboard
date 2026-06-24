@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Dashboard Overview{% endblock %}
+{% block content %}
+<section class="kpi-grid">
+  {% set cards = [
+    ('Total courses planned', kpis.total_courses, 'primary'),
+    ('Completed courses', kpis.completed, 'success'),
+    ('Upcoming courses', kpis.upcoming, 'info'),
+    ('Delayed courses', kpis.delayed, 'warning'),
+    ('Dropped courses', kpis.dropped, 'danger'),
+    ('Target participants', '{:,.0f}'.format(kpis.target_participants), 'primary'),
+    ('Actual participants', '{:,.0f}'.format(kpis.actual_participants), 'success'),
+    ('Participant achievement', '{}%'.format(kpis.achievement_pct), 'info'),
+    ('Estimated budget', 'RM {:,.0f}'.format(kpis.budget), 'primary')
+  ] %}
+  {% for label, value, tone in cards %}
+    <div class="kpi-card tone-{{ tone }}">
+      <span>{{ label }}</span>
+      <strong>{{ value }}</strong>
+    </div>
+  {% endfor %}
+</section>
+
+<section class="dashboard-grid mt-4">
+  <div class="panel"><h2>Courses by Section</h2><canvas id="coursesBySection"></canvas></div>
+  <div class="panel"><h2>Status Distribution</h2><canvas id="statusDistribution"></canvas></div>
+  <div class="panel wide"><h2>Monthly Progress</h2><canvas id="coursesByMonth"></canvas></div>
+  <div class="panel wide"><h2>Target vs Actual Participants</h2><canvas id="participantsBySection"></canvas></div>
+  <div class="panel"><h2>Budget by Section</h2><canvas id="budgetBySection"></canvas></div>
+  <div class="panel"><h2>Top 10 Courses by Budget</h2><canvas id="topBudget"></canvas></div>
+  <div class="panel wide"><h2>Course Type by Section</h2><canvas id="typeBySection"></canvas></div>
+  <div class="panel alert-panel">
+    <h2>Alert Panel</h2>
+    {% for alert in alerts %}
+      <div class="alert-line {{ alert.severity }}">
+        <strong>{{ alert.type }}</strong>
+        <span>{{ alert.course }}</span>
+        <small>{{ alert.message }}</small>
+      </div>
+    {% else %}
+      <p class="text-muted mb-0">No alerts for the current filter.</p>
+    {% endfor %}
+    <a class="btn btn-outline-primary btn-sm mt-3" href="{{ filtered_url('alerts') }}">View all alerts</a>
+  </div>
+</section>
+{% endblock %}

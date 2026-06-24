@@ -1,0 +1,221 @@
+:root {
+  --navy: #0b2545;
+  --blue: #0b3d91;
+  --accent: #18a0a8;
+  --bg: #f4f6f9;
+  --line: #d9e1ec;
+  --text: #172033;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.94rem;
+}
+
+.app-nav {
+  background: var(--navy);
+  box-shadow: 0 2px 12px rgba(11, 37, 69, 0.16);
+}
+
+.btn-accent {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.upload-form {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.upload-form input {
+  width: 220px;
+}
+
+.page-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.page-heading h1 {
+  font-size: clamp(1.45rem, 2vw, 2rem);
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.export-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.filter-bar {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(120px, 1fr)) auto auto;
+  gap: 0.55rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(9, minmax(130px, 1fr));
+  gap: 0.8rem;
+}
+
+.kpi-card {
+  min-height: 105px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--blue);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.kpi-card span {
+  color: #5c6678;
+  font-size: 0.82rem;
+  line-height: 1.25;
+}
+
+.kpi-card strong {
+  font-size: clamp(1.25rem, 2vw, 1.8rem);
+  letter-spacing: 0;
+}
+
+.tone-success { border-left-color: #198754; }
+.tone-info { border-left-color: #0dcaf0; }
+.tone-warning { border-left-color: #ffc107; }
+.tone-danger { border-left-color: #dc3545; }
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.panel {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.panel h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.85rem;
+}
+
+.panel canvas {
+  width: 100% !important;
+  height: 300px !important;
+}
+
+.panel.wide {
+  grid-column: span 2;
+}
+
+.alert-panel {
+  grid-column: span 2;
+}
+
+.alert-line {
+  border-left: 4px solid #ffc107;
+  background: #fff8e1;
+  padding: 0.65rem 0.75rem;
+  margin-bottom: 0.55rem;
+  border-radius: 6px;
+  display: grid;
+  gap: 0.1rem;
+}
+
+.alert-line.danger {
+  border-left-color: #dc3545;
+  background: #fdecec;
+}
+
+.alert-line span {
+  font-weight: 600;
+}
+
+.alert-line small {
+  color: #5c6678;
+}
+
+.table {
+  --bs-table-hover-bg: #eef4fb;
+}
+
+.course-title {
+  min-width: 300px;
+  font-weight: 600;
+}
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  background: #e8edf5;
+  color: #24324a;
+  font-weight: 700;
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.status-completed { background: #d1e7dd; color: #0f5132; }
+.status-upcoming { background: #cff4fc; color: #055160; }
+.status-in-progress { background: #e7f1ff; color: #084298; }
+.status-delayed { background: #fff3cd; color: #664d03; }
+.status-no-update { background: #e2e3e5; color: #41464b; }
+.status-dropped { background: #f8d7da; color: #842029; }
+.status-mode-changed { background: #d6d8ff; color: #252a75; }
+
+@media (max-width: 1200px) {
+  .kpi-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .dashboard-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .filter-bar {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .page-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .upload-form {
+    align-items: stretch;
+    flex-direction: column;
+    margin-top: 0.5rem;
+  }
+  .upload-form input {
+    width: 100%;
+  }
+  .kpi-grid,
+  .dashboard-grid,
+  .filter-bar {
+    grid-template-columns: 1fr;
+  }
+  .panel.wide,
+  .alert-panel {
+    grid-column: auto;
+  }
+}

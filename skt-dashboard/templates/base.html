@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SKT Course Planning 2026</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.css" rel="stylesheet">
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark app-nav sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-semibold" href="{{ url_for('dashboard') }}">SKT Course Planning 2026</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('dashboard') }}">Overview</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('section') }}">Sections</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('monthly') }}">Monthly</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('courses') }}">Courses</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('alerts') }}">Alerts</a></li>
+        </ul>
+        <form action="{{ url_for('refresh') }}" method="post" class="me-2">
+          <button class="btn btn-outline-light btn-sm" type="submit">Refresh</button>
+        </form>
+        <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data" class="upload-form">
+          <input class="form-control form-control-sm" type="file" name="excel_file" accept=".xlsx,.xls,.xlsm">
+          <button class="btn btn-accent btn-sm" type="submit">Upload</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container-fluid px-3 px-lg-4 py-4">
+    <div class="page-heading">
+      <div>
+        <p class="text-uppercase small text-muted mb-1">Sub Pengajian Latihan Digital</p>
+        <h1>{% block title %}{% endblock %}</h1>
+      </div>
+      <div class="export-actions">
+        <a class="btn btn-outline-secondary btn-sm" href="{{ filtered_url('export', type='csv') }}">CSV</a>
+        <a class="btn btn-outline-secondary btn-sm" href="{{ filtered_url('export', type='xlsx') }}">Excel</a>
+      </div>
+    </div>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    {% include "_filters.html" %}
+    {% block content %}{% endblock %}
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.datatables.net/2.0.8/js/dataTables.js"></script>
+  <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.js"></script>
+  <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Alert Panel{% endblock %}
+{% block content %}
+<div class="panel">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle data-table">
+      <thead><tr><th>Type</th><th>Course</th><th>Section</th><th>Date</th><th>Warning</th><th>Severity</th></tr></thead>
+      <tbody>
+        {% for alert in alerts %}
+        <tr>
+          <td><strong>{{ alert.type }}</strong></td>
+          <td>{{ alert.course }}</td>
+          <td>{{ alert.section }}</td>
+          <td>{{ alert.date }}</td>
+          <td>{{ alert.message }}</td>
+          <td><span class="badge text-bg-{{ alert.severity }}">{{ alert.severity }}</span></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

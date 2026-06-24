@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+
+venv/
+.env
+
+database/*.db
+
+uploads/
+
+instance/
+
+*.sqlite
+*.sqlite3
+
+.DS_Storegi

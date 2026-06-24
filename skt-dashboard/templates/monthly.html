@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Monthly Monitoring{% endblock %}
+{% block content %}
+<div class="panel">
+  <div class="table-responsive">
+    <table class="table table-hover align-middle data-table">
+      <thead><tr><th>Month</th><th>Courses</th><th>Completed</th><th>Upcoming</th><th>Target</th><th>Actual</th><th>Achievement</th></tr></thead>
+      <tbody>
+        {% for row in monthly_rows %}
+        <tr>
+          <td><strong>{{ row.month_label }}</strong></td>
+          <td>{{ row.courses }}</td>
+          <td>{{ row.completed }}</td>
+          <td>{{ row.upcoming }}</td>
+          <td>{{ '{:,.0f}'.format(row.target_participants) }}</td>
+          <td>{{ '{:,.0f}'.format(row.actual_participants) }}</td>
+          <td><span class="status-pill">{{ row.achievement_pct }}%</span></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

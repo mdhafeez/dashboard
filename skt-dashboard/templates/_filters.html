@@ -1,0 +1,46 @@
+<form class="filter-bar" method="get">
+  <select class="form-select form-select-sm" name="year">
+    <option value="">All Years</option>
+    {% for year in filter_options.years %}
+      <option value="{{ year }}" {% if active_filters.get('year') == year %}selected{% endif %}>{{ year }}</option>
+    {% endfor %}
+  </select>
+  <select class="form-select form-select-sm" name="month">
+    <option value="">All Months</option>
+    {% for month in filter_options.months %}
+      <option value="{{ month.value }}" {% if active_filters.get('month') == month.value %}selected{% endif %}>{{ month.label }}</option>
+    {% endfor %}
+  </select>
+  <select class="form-select form-select-sm" name="section">
+    <option value="">All Sections</option>
+    {% for section in filter_options.sections %}
+      <option value="{{ section }}" {% if active_filters.get('section') == section %}selected{% endif %}>{{ section }}</option>
+    {% endfor %}
+  </select>
+  <select class="form-select form-select-sm" name="course_type">
+    <option value="">All Types</option>
+    {% for item in filter_options.course_types %}
+      <option value="{{ item }}" {% if active_filters.get('course_type') == item %}selected{% endif %}>{{ item }}</option>
+    {% endfor %}
+  </select>
+  <select class="form-select form-select-sm" name="status">
+    <option value="">All Status</option>
+    {% for item in filter_options.statuses %}
+      <option value="{{ item }}" {% if active_filters.get('status') == item %}selected{% endif %}>{{ item }}</option>
+    {% endfor %}
+  </select>
+  <select class="form-select form-select-sm" name="coordinator">
+    <option value="">All Coordinators</option>
+    {% for item in filter_options.coordinators %}
+      <option value="{{ item }}" {% if active_filters.get('coordinator') == item %}selected{% endif %}>{{ item }}</option>
+    {% endfor %}
+  </select>
+  <select class="form-select form-select-sm" name="psp_category">
+    <option value="">All PSP</option>
+    {% for item in filter_options.psp_categories %}
+      <option value="{{ item }}" {% if active_filters.get('psp_category') == item %}selected{% endif %}>{{ item }}</option>
+    {% endfor %}
+  </select>
+  <button class="btn btn-primary btn-sm" type="submit">Apply</button>
+  <a class="btn btn-outline-secondary btn-sm" href="{{ request.path }}">Reset</a>
+</form>
